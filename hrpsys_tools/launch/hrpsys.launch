@@ -28,7 +28,6 @@
   <arg name="REALTIME" default="false" />
   <arg name="GUI" default="true" />
   <arg name="DEBUG_HRPSYS" default="false" />
-  <arg name="COLLISION_DETECTION" default="true" />
   <arg unless="$(arg DEBUG_HRPSYS)" name="RTCD_LAUNCH_PREFIX" default="" />
   <arg     if="$(arg DEBUG_HRPSYS)" name="RTCD_LAUNCH_PREFIX"
            default='xterm -e gdb -iex "set height 0" -ex run --args' /> <!-- for debugging with gdb -->
@@ -100,6 +99,7 @@
   <arg name="HRPSYS_PY_NAME" default="hrpsys_tools_config.py"/>
   <arg name="HRPSYS_PY_ARGS" default='' />
   <arg name="LAUNCH_HRPSYSPY" default="true" />
+  <arg name="COLLISION_DETECTION" default="true" />
   <!-- END:hrpsys.py setting -->
 
   <!-- <node if="$(arg START_NAME_SERVER)" -->
@@ -135,7 +135,7 @@
 
   <group if="$(arg LAUNCH_HRPSYSPY)">
     <node name="hrpsys_py" pkg="$(arg HRPSYS_PY_PKG)" type="$(arg HRPSYS_PY_NAME)" output="screen"
-          args='$(arg HRPSYS_PY_ARGS) $(arg SIMULATOR_NAME) $(arg MODEL_FILE) $(arg omniorb_args)'
+          args='$(arg HRPSYS_PY_ARGS) $(arg SIMULATOR_NAME) $(arg MODEL_FILE) $(arg omniorb_args) $(arg COLLISION_DETECTION)'
           launch-prefix="$(arg PY_LAUNCH_PREFIX)" />
   </group>
 
